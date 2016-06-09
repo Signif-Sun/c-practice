@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <ctype.h>
+
+/*---ctype.h的使用--将字符转换到其对应字母表中的位置数字，例如a/A转化为1--------start----------------*/
+int al_dig_trans(char c)
+{
+	int x;
+	if(isdigit(c))
+	{
+		x = c - '0';
+	}
+	else if(islower(c))
+	{
+		x = c - 'a' + 1;
+	}
+	else
+	{
+		x = c - 'A' + 1;
+	}
+	return x;
+}
+/*-----驱动函数-------------*/
+void al_dig_trans_test()
+{
+	char c;
+	int x;
+	while((c = getchar()) != EOF  && isalnum(c) && c !='\n')  //isalnum()表示非字母数字进不来
+	{
+		x = al_dig_trans(c);
+		printf("%d\n",x);
+	}
+	x = x >> 1;
+	printf("%d\n",x);   //char 转换为int类型的时候，一般机器是在左位填0的，不会出现负数，输入A/a可测  
+}
+/*-----将字符转换到其对应字母表中的位置数字，例如a/A转化为1-------over---------------*/
