@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+/*----c_practice-----------output_string------------start----------*/
+  void output_string()
+  {
+	  //在下述定义中元素数组的长度必须要大于字符串长度一个字节，因为需要用'\0'来结束字符串，所以要多1存储空间
+	const char con[5][6] = {{"    I"},{"   am"},{"  red"},{" very"},{"great"}};
+	int i = 0,j;
+	for(; i < 5; i++)
+	{
+		for(j = 0; j < 6; j++)
+		{
+			printf("%c",con[i][j]);
+		}
+		puts("");
+	}
+  }
+  /*----c_practice-----------output_string------------start----------*/
