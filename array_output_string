@@ -16,3 +16,15 @@
 	}
   }
   /*----c_practice-----------output_string------------start----------*/
+  
+  /*----c_practice-----------output_string_c++------------start----------*/
+  void output_string_cpp()
+  {
+	  string con[5] = {"    I","   am","  red"," very","great"};
+	auto len = 5;
+	for(unsigned i = 0; i != len; i++)
+	{
+		cout << con[i] << endl;
+	}
+  }
+  /*----c_practice-----------output_string_c++------------start----------*/
