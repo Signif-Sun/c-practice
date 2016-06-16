@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+ 
+#define LEN 8  //数组的长度，可更改
+ 
+ /*返回数组类型，参数1传入数组，参数2数组长度，参数3，随机数的阈值（上限值）*/
+int* arr_rand(int nums[],int n,int lim)  
+{
+    int i = 0;
+    int j;
+    enum mark {NO,YES};  //由于vs2013不支持bool类型，我采取枚举类型代替
+    enum mark flag;
+    srand((unsigned int)time(NULL));
+    while(i < n)
+    {
+        nums[i] = rand() % lim;
+        if(i > 0)
+        {
+            flag = YES;
+            for(j = 0;j < i; j++)
+            {
+                if(nums[i] == nums[j])
+                {
+                    flag = NO;
+                }      
+            }
+            if(flag)
+            {
+                i++;
+            }
+        }
+        if(i == 0)  //放下边避免程序错误
+        {
+            i++;
+        }
+    }
+    return nums;
+}
+//测试函数，如需使用则在main函数中arr_rand_t();调用即可
+void arr_rand_t()
+{
+    int nums[LEN];
+    int i = 0;
+    int lim = 21;
+    arr_rand(nums,LEN,lim);
+    for(; i < LEN; i++)
+    {
+        printf("%d\n",nums[i]);
+    }  
+}
