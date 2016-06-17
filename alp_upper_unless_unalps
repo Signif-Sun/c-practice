@@ -1,0 +1,36 @@
+//vs2013编译器下运行，如不可执行添加头文件"stdafx.h"
+#include <stdio.h>
+#include <ctype.h>
+
+#define ALP_LEN 10  //你要输入的长度，也就是最后输出截取长度
+
+/*-----------c语言输入十个字母转大写，滤除掉非字母（数字，符号等）--------start-------------*/
+void alp_upper()
+{
+	char c;
+	int i = 0;
+	puts("pls input 10 alps:");
+	c = getchar();
+	while(i < ALP_LEN)
+	{
+		if(isalpha(c))  //控制必须字母输入
+		{
+			if(isupper(c))
+			{
+				putchar(c);
+			}
+			else
+			{
+				c = toupper(c);
+				putchar(c);
+			}
+			c = getchar();
+			i++;
+		}
+		else   //非字母继续循环，不做记录
+		{
+			c = getchar();
+		}				
+	}
+}
+/*-----------c语言输入十个字母转大写，滤除掉非字母（数字，符号等）--------over------------*/
