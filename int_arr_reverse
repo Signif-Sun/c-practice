@@ -1,0 +1,38 @@
+/*-----------c语言将数组前后颠倒，如果是偶数实现半数对调，若果是奇数实现前多一个对调--------start-------------*/
+#include <stdio.h>
+#include <string.h>
+
+#define ARR_LEN 10
+
+void arr_rev(int arr[],int n) 
+{
+	int i = 0,k = 0;
+	int j;
+	int nums[ARR_LEN];
+	j = n / 2;
+	for(;j < n;j++)
+	{
+		nums[i] = arr[j];
+		i++;
+	}
+	j = n / 2;
+	for(;k < j; k++)
+	{
+		nums[i] = arr[k];
+		//printf("%d\n",nums[i]);
+		i++;
+	}
+	memmove(arr,nums,n * sizeof(int)); //将数组nums中的内容写到arr中，注意长度写法，必须是字节长度
+}
+//测试函数，需要可以在main函数中直接实现调用
+void arr_rev_t()
+{
+	int i = 0;
+	int arr[ARR_LEN] = {0,1,2,3,4,5,6,7,8,9};
+	arr_rev(arr,ARR_LEN);
+	for(;i < ARR_LEN;i++)
+	{
+		printf("%d ",arr[i]);
+	}
+}
+/*-----------c语言将数组前后颠倒，如果是偶数实现半数对调，若果是奇数实现前多一个对调--------start-------------*/
