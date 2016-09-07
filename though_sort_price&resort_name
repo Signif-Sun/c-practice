@@ -1,0 +1,59 @@
+#include "stdafx.h"
+#include <stdio.h>
+
+//存储名字的结构体
+struct  sp {
+	char name[20];
+	double jg;
+} ;
+//
+void sort_name()
+{
+	//设置三个该商品名称作为测试项
+	struct sp sp1 = { "xiyifen", 120.7 };
+	struct sp sp2 = { "maoyi", 60.7 };
+	struct sp sp3 = { "shuji", 410.7 };
+	//存储三个商品的价格
+	double sj[3] = {sp1.jg,sp2.jg,sp3.jg};
+	//存储对应三哥个商品的名字
+	char *nm[10] = {sp1.name,sp2.name,sp3.name };
+	char *tmp;
+	int j;
+	double temp;
+	//输出原名称顺序
+	for (int i = 0; i < 3; i++)
+	{
+		if (i != 2)
+		{
+			printf(nm[i]);
+			printf("-");
+		}
+		else
+			printf(nm[i]);
+	}
+	//对于价格按照由低到高顺序交换名称顺序，不做价格顺序调换，采取冒泡法
+	for (int i = 0; i < 2; i++)
+	{
+		for (j = i+1 ; j < 3; j++)
+		{
+			if (sj[i] > sj[j])
+			{
+				tmp = nm[i];
+				nm[i] = nm[j];
+				nm[j] = tmp;
+			}
+		}
+	}
+	puts("");
+	//输出调整后的名称顺序
+	for (int i = 0; i < 3; i++)
+	{
+		if (i != 2)
+		{
+			printf(nm[i]);
+			printf("-");
+		}
+		else
+			printf(nm[i]);
+	}
+}
