@@ -1,0 +1,37 @@
+#include <cstdio.h>
+
+//using namespace std;
+
+int main(void)
+{
+	int rsv = 0;
+
+	printf("please input the num which you need to judge?\n");
+
+	scanf_s("%d",&rsv);
+
+	int temp=0;
+----------------保留原数作比较------------------------------------------------------
+	int rsv_bu = rsv;
+	while (rsv > 0)
+	{
+----------------反向获取该数字------------------------------------------------------
+		temp = 10 * temp + rsv % 10;
+		rsv = rsv / 10;
+		
+		//cout <<  "rsv=" << rsv << endl;
+		//cout << "temp=" << temp << endl;
+	}
+
+	if (rsv_bu == temp)
+	{
+		printf("the num is palindromic!");
+	}
+
+	else {
+		printf("the num is not palindromic!");
+	}
+	
+
+	return 0;
+}
