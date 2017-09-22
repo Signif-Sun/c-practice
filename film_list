@@ -1,0 +1,144 @@
+#include <sstream>
+#include <regex>
+#include <bitset>
+
+#include "stdafx.h"
+#include <cstring>
+#include <iostream>
+#include <Windows.h>
+#define FILMSIZE 2
+#define FILENAMESIZE 20
+#include <stdio.h>
+#define SIZE 15
+#define GENDERSIZE 5
+#include <ctime>
+#include <cassert>
+
+
+using namespace std;
+
+typedef struct node {
+	char name[20];
+	double rating;
+} film;
+
+struct films {
+	char name[20];
+	double charge;
+	int rating;
+	films* next;
+};
+
+film* getFilm()
+{
+	int size = 0;
+	puts("please input the film name and rating!");
+	film *filmCollectionPoint = (film*)malloc(FILMSIZE * sizeof(film));
+	while (size < FILMSIZE) {
+		scanf_s("%s%lf", &filmCollectionPoint->name, 20, &filmCollectionPoint->rating);
+		filmCollectionPoint++;
+		size++;
+	}
+	filmCollectionPoint = filmCollectionPoint - FILMSIZE;
+	printf("%s%4.2lf\n", filmCollectionPoint->name, filmCollectionPoint->rating);
+	//printf("%d\n", filmCollectionPoint);
+	return filmCollectionPoint;
+}
+
+class getFilmLists {
+public:
+	films* getFilms() {
+		films* current, *prev;
+		films* head = NULL;
+		char input[FILENAMESIZE];
+		puts("please inut the file name which you want to see!");
+		while (gets_s(input, FILENAMESIZE) != NULL && input[0] != '\0') {
+			current = (films*)malloc(sizeof(films));
+			if (head == NULL) {
+				head = current;
+			}
+			else {
+				prev->next = current;
+			}
+			current->next = NULL;
+			strncpy_s(current->name, input, FILENAMESIZE);
+			puts("please input the charge and rating!");
+			scanf_s("%lf%d", &current->charge, &current->rating);
+			while (getchar() != '\n') {
+				continue;
+			}
+			puts("please input anthor film's infomation or input null to exit!");
+			prev = current;
+		}
+		return head;
+	}
+	void inputFilmLists() {
+		int number = 1;
+		films* filmsCollection = getFilms();
+		while (filmsCollection != NULL) {
+			printf("the film%d's name is <<%s>> and it's charge and rating are %4.2lf,%d!\n", number, filmsCollection->name, filmsCollection->charge, filmsCollection->rating);
+			number++;
+			filmsCollection = filmsCollection->next;
+		}
+		puts("that is all,many thx~");
+	}
+	unsigned int countFilmsNode(films* filmsList) {
+		unsigned int count = 0;
+		films* filmsCount = filmsList;
+		while (filmsCount != NULL) {
+			count++;
+			filmsCount = filmsCount->next;
+		}
+		return count;
+	}
+
+	char* getContent(films* filmsList, unsigned int index) {
+		unsigned int count = 0;
+		films* filmsCount = filmsList;
+		while (filmsCount != NULL) {
+			if (index == count) {
+				return filmsCount->name;
+			}
+			count++;
+			filmsCount = filmsCount->next;
+		}
+		return NULL;
+	}
+	int getNameIndex(films *filmsList, char* nameFind) {
+		int count = 0;
+		films* filmsCount = filmsList;
+		while (filmsCount != NULL) {
+			cout << filmsCount->name << sizeof(filmsCount->name) << endl;
+			cout << nameFind << sizeof(nameFind) << endl;
+			if (filmsCount->name == static_cast<string>(nameFind)) {
+				return count;
+			}
+			count++;
+			filmsCount = filmsCount->next;
+		}
+		return -1;
+	}
+
+private:
+	char* VS_StrRTrim(char *pStr)
+	{
+		char *pTmp = pStr + strlen(pStr) - 1;
+
+		while (*pTmp == ' ')
+		{
+			*pTmp = (char)('/0');
+			pTmp--;
+		}
+		return pStr;
+	}
+};
+
+void actuateFunc() {
+
+	getFilmLists filmCollections;
+	films* filmsCount = filmCollections.getFilms();
+	char* index = "Jerry";
+	auto count = filmCollections.getNameIndex(filmsCount, index);
+	cout << "The node number of the list is " << count << endl;
+
+}
