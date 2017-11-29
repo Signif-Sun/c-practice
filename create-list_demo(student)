@@ -1,0 +1,55 @@
+//以下所述方法是list方式实现的，编译平台VS2015，如果其他平台编译有问题，请自行修改scanf_s安全函数为scanf常规函数
+//编写input()实现对5个学生的学号 姓名 性别 年龄和成绩等数
+
+#include <stdio.h>
+#define SIZE 15
+#define GENDERSIZE 5
+//SIZE是学号和姓名长度，GENDERSIZE是性别长度
+struct info {
+    char stuNo[SIZE];
+    char name[SIZE];
+    char gender[GENDERSIZE];
+    int age;
+    double grade;
+    info* next;
+};
+ 
+struct info* input() {
+    info* current, *prev;
+    info* head = NULL;
+    char stuNoTemp[SIZE];
+    char nameTemp[SIZE];
+    char genderTemp[GENDERSIZE];
+    int ageTemp;
+    double gradeTemp;
+    puts("please input the student's Number,name,gender,age and grade in order:");
+    while ((scanf_s("%s%s%s%d%lf", stuNoTemp, SIZE, nameTemp, SIZE, genderTemp, GENDERSIZE, &ageTemp, &gradeTemp) == 5)) {
+        current = (info*)malloc(sizeof(info));
+        if (head == NULL) {
+            head = current;
+        }
+        else {
+            prev->next = current;
+        }
+        current->next = NULL;
+        strncpy_s(current->stuNo, stuNoTemp, SIZE);
+        strncpy_s(current->name, nameTemp, SIZE);
+        strncpy_s(current->gender, genderTemp, GENDERSIZE);
+        current->age = ageTemp;
+        current->grade = gradeTemp;
+        /*while (getchar() != '\n') {
+            continue;
+        }*/
+        puts("please input anthor student's infomation or input 'ctrl+z' to exit!");
+        prev = current;
+    }
+    return head;
+}
+ 
+void output() {
+    struct info* stuInfo = input();
+    while ( stuInfo != NULL) {
+        printf("%s %s %s %d %3.2lf\n", stuInfo->stuNo, stuInfo->name, stuInfo->gender, stuInfo->age, stuInfo->grade);
+        stuInfo = stuInfo->next;
+    }
+}
